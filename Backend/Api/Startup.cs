@@ -23,6 +23,12 @@ namespace Api
 
             services.AddControllers();
             services.AddScoped<ITemperatureService, TemperatureService>();
+            services.AddCors(o => o.AddPolicy("OpenPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
@@ -32,6 +38,8 @@ namespace Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("OpenPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

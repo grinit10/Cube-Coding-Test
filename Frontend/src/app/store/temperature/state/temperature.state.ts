@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
-import {Store} from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { DropDownModel } from 'src/app/shared/models/dropdown.model';
 import { TemperatureViewModel } from 'src/app/shared/models/temperature-view.model';
 import { TemperatureService } from 'src/app/temperature-converter/services/temperature-converter.service';
-import { AddTemperatureUnits, GetTemperatureConvertedResult, GetTemperatureTypes, PopulateTemperatureConvertedResult } from '../actions/temperature.actions';
+import { AddTemperatureUnits, GetTemperatureConvertedResult, GetTemperatureUnits, PopulateTemperatureConvertedResult } from '../actions/temperature.actions';
 import { TemperatureModel } from 'src/app/shared/models/temperature.model';
 
 export class TemperatureStateModel {
@@ -16,7 +16,7 @@ export class TemperatureStateModel {
 }
 
 @State<TemperatureStateModel>({
-    name: 'subjectResults',
+    name: 'temperature',
     defaults: {
         temperatureConvertedResult: {},
         units: [],
@@ -42,7 +42,8 @@ export class TemperatureState {
     }
 
     @Action(GetTemperatureConvertedResult)
-    GetTemperatureConvertedResult({ getState, setState }: StateContext<TemperatureStateModel>,  payload: TemperatureModel): void {
+    GetTemperatureConvertedResult({ getState, setState }: StateContext<TemperatureStateModel>,
+                                  { payload }: GetTemperatureConvertedResult): void {
         const state = getState();
         setState({
             ...state,
@@ -55,21 +56,21 @@ export class TemperatureState {
 
     @Action(PopulateTemperatureConvertedResult)
     PopulateTemperatureConvertedResult({ getState, patchState }: StateContext<TemperatureStateModel>,
-                                       payload: TemperatureViewModel): void {
+                                       { payload }: PopulateTemperatureConvertedResult): void {
         const state = getState();
         patchState({
             ...state,
-            temperatureConvertedResult: {...payload},
+            temperatureConvertedResult: { ...payload },
             temperatureConvertedResultIsLoading: false,
         });
     }
 
-    @Action(GetTemperatureTypes)
+    @Action(GetTemperatureUnits)
     GetTemperatureTypes({ getState, setState }: StateContext<TemperatureStateModel>): void {
         const state = getState();
         setState({
             ...state,
-            temperatureConvertedResultIsLoading: true,
+            unitsIsLoading: true,
         });
         this.temperatureService.getTemperatureUnits().pipe(tap((result: DropDownModel[]) => {
             this.store.dispatch(new AddTemperatureUnits(result));
@@ -78,7 +79,7 @@ export class TemperatureState {
 
     @Action(AddTemperatureUnits)
     AddTemperatureUnits({ getState, patchState }: StateContext<TemperatureStateModel>,
-                        payload: DropDownModel[]): void {
+                        { payload }: AddTemperatureUnits): void {
         const state = getState();
         patchState({
             ...state,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TemperatureComponent } from './components/temperature/temperature.component';
 import { SharedModule } from '../shared/shared.module';
 import { TemperatureConverterRoutingModule } from './temperature-converter.routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,8 @@ import { TemperatureConverterRoutingModule } from './temperature-converter.routi
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     TemperatureConverterRoutingModule
   ]
 })

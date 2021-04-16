@@ -1,1 +1,33 @@
-<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+<form fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" [formGroup]="temperatureForm" (ngSubmit)="onSubmit()">
+
+    <span *ngIf='isUnitsLoading'>Loading...</span>
+    <mat-form-field appearance="fill" *ngIf='!isUnitsLoading'>
+        <mat-label>Select temperature unit</mat-label>
+        <mat-select formControlName="unit">
+            <mat-option *ngFor="let unit of units" [value]="unit.id">
+                {{unit.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Temperature</mat-label>
+        <input matInput type="number" formControlName="temperature">
+    </mat-form-field>
+
+    <div fxLayout="column" fxLayoutAlign="center stretch">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!temperatureForm.valid">Convert</button>
+    </div>
+
+</form>
+
+<span *ngIf='temperatureConvertedResultIsLoading'>Loading...</span>
+
+<div *ngIf='temperatureConvertedResultIsLoaded'>
+    <span>Converted temperatures</span>
+    <ul>
+        <li>Temperature in celsius {{convertedTemperatureResult.celsiusTemperature}}</li>
+        <li>Temperature in fahrenheit {{convertedTemperatureResult.fahrenheitTemperature}}</li>
+        <li>Temperature in kelvin {{convertedTemperatureResult.kelvinTemperature}}</li>
+    </ul>
+</div>

@@ -16,7 +16,7 @@ export class PopulateTemperatureConvertedResult {
 }
 
 
-export class GetTemperatureTypes {
+export class GetTemperatureUnits {
     static readonly type = '[TemperatureUnits] Get';
 
     constructor() { }
