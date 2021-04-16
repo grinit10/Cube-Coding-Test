@@ -3,7 +3,7 @@
     <span *ngIf='isUnitsLoading'>Loading...</span>
     <mat-form-field appearance="fill" *ngIf='!isUnitsLoading'>
         <mat-label>Select temperature unit</mat-label>
-        <mat-select formControlName="unit">
+        <mat-select required formControlName="unit">
             <mat-option *ngFor="let unit of units" [value]="unit.id">
                 {{unit.name}}
             </mat-option>
@@ -12,7 +12,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Temperature</mat-label>
-        <input matInput type="number" formControlName="temperature">
+        <input required matInput type="number" formControlName="temperature">
     </mat-form-field>
 
     <div fxLayout="column" fxLayoutAlign="center stretch">
