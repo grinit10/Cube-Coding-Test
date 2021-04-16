@@ -1,5 +1,5 @@
 export interface TemperatureViewModel {
-    celsiusTemperature: string;
-    fahrenheitTemperature: string;
-    kelvinTemperature: string;
+    celsiusTemperature?: number;
+    fahrenheitTemperature?: number;
+    kelvinTemperature?: number;
 }

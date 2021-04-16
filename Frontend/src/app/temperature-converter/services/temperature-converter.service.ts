@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DropDownModel } from 'src/app/shared/models/dropdown.model';
 import { TemperatureViewModel } from 'src/app/shared/models/temperature-view.model';
 import { TemperatureModel } from 'src/app/shared/models/temperature.model';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -20,6 +21,6 @@ export class TemperatureService extends DataService {
     getConvertedTemperature = (temperatureModel: TemperatureModel): Observable<TemperatureViewModel> =>
         this.readService.readAll<TemperatureViewModel>(temperatureModel, this.url)
 
-    getTemperatureUnits = (): Observable<TemperatureViewModel> =>
-        this.readService.readAll<TemperatureViewModel>(null, `${this.url}/units`)
+    getTemperatureUnits = (): Observable<DropDownModel[]> =>
+        this.readService.readAll<DropDownModel[]>(null, `${this.url}/units`)
 }
