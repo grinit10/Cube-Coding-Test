@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Domain.Enums;
 using Domain.Models;
 using Domain.ViewModels;
+using System.Collections.Generic;
 
 namespace Bl.Services
 {
@@ -17,10 +17,8 @@ namespace Bl.Services
                 _ => ConvertFromKelvin(temperatureModel)
             };
 
-        public List<DropDownModel> GetUnits()
-        {
-            return (from UnitType unit in Enum.GetValues(typeof(UnitType)) select new DropDownModel {Id = (int) unit, Name = unit.ToString()}).ToList();
-        }
+        public List<DropDownModel> GetUnits() =>
+            (from UnitType unit in Enum.GetValues(typeof(UnitType)) select new DropDownModel {Id = (int) unit, Name = unit.ToString()}).ToList();
 
         private static TemperatureViewModel ConvertFromCelsius(TemperatureModel temperatureModel) =>
             new()
