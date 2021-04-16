@@ -6,7 +6,6 @@ import { DropDownModel } from 'src/app/shared/models/dropdown.model';
 import { TemperatureViewModel } from 'src/app/shared/models/temperature-view.model';
 import { TemperatureService } from 'src/app/temperature-converter/services/temperature-converter.service';
 import { AddTemperatureUnits, GetTemperatureConvertedResult, GetTemperatureUnits, PopulateTemperatureConvertedResult } from '../actions/temperature.actions';
-import { TemperatureModel } from 'src/app/shared/models/temperature.model';
 
 export class TemperatureStateModel {
     temperatureConvertedResult: TemperatureViewModel = {};
